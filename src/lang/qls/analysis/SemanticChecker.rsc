@@ -38,15 +38,13 @@ private set[Message] filenameDoesNotMatchErrors(Stylesheet s) =
   {stylesheetDoesNotMatchFilename(s.ident.name, s@location)}
     when s.ident.name != basename(s@location);
 
-private default set[Message] filenameDoesNotMatchErrors(Stylesheet s) = 
-  {};
+private default set[Message] filenameDoesNotMatchErrors(Stylesheet s) = {};
   
 private set[Message] accompanyingFormNotFoundErrors(Stylesheet s) =
   {accompanyingFormNotFound(s.ident.name, s@location)}
     when !isFile(getAccompanyingFormLocation(s));
 
-private default set[Message] accompanyingFormNotFoundErrors(Stylesheet s) =
-  {};
+private default set[Message] accompanyingFormNotFoundErrors(Stylesheet s) = {};
 
 private set[Message] alreadyUsedQuestionErrors(Stylesheet s) {
   set[Message] errors = {};

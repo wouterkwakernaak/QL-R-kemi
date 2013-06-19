@@ -14,8 +14,7 @@ lexical Date =
   @category="Constant" "$" Year "-" Month "-" Day;
 
 // Note: We assume that dates are valid in domain [1000 to 2999]
-lexical Year =  
-  [1-2][0-9][0-9][0-9];
+lexical Year = [1-2][0-9][0-9][0-9];
 
 lexical Month
   = [0][0-9]

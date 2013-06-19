@@ -22,9 +22,7 @@ data Definition
   | defaultDefinition(Type \type, list[StyleRule] styleRules)
   ;
 
-data LayoutRule
-  = layoutRule(Definition definition)
-  ;
+data LayoutRule = layoutRule(Definition definition);
 
 data Ident = ident(str name);
 

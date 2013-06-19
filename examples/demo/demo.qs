@@ -1,4 +1,5 @@
 stylesheet demo {
+
   page "Age precondition" {
     question theAge {
       widget number[0., 125., 1.]

@@ -22,16 +22,11 @@ private list[str] defaultAttrs =
   ["widget", "label-fontsize", "label-font", "label-color"];
 
 private map[Type, list[str]] allowedAttrs = (
-  booleanType("boolean"):
-    defaultAttrs + ["fontsize", "font", "color"],
-  integerType("integer"):
-    defaultAttrs + ["width", "fontsize", "font", "color"],
-  moneyType("money"):
-    defaultAttrs + ["width", "fontsize", "font", "color"],
-  dateType("date"):
-    defaultAttrs + [],
-  stringType("string"):
-    defaultAttrs + ["width", "fontsize", "font", "color"]
+  booleanType("boolean"): defaultAttrs + ["fontsize", "font", "color"],
+  integerType("integer"): defaultAttrs + ["width", "fontsize", "font", "color"],
+  moneyType("money"): defaultAttrs + ["width", "fontsize", "font", "color"],
+  dateType("date"): defaultAttrs + [],
+  stringType("string"):defaultAttrs + ["width", "fontsize", "font", "color"]
 );
 
 private bool isAllowedAttr(Type \type, StyleAttr attr) =
@@ -41,8 +36,7 @@ public set[Message] unallowedAttrErrors(Stylesheet s) =
   unallowedDefaultAttrErrors(s) +
   unallowedQuestionAttrErrors(s);
 
-private set[Message] unallowedDefaultAttrErrors(Stylesheet s) =
-  {
+private set[Message] unallowedDefaultAttrErrors(Stylesheet s) = {
     typeWithInvalidAttr(sr.attr.name, dd.\type.name, sr@location) | 
     dd <- getDefaultDefinitions(s), 
     sr <- dd.styleRules, 
@@ -51,8 +45,7 @@ private set[Message] unallowedDefaultAttrErrors(Stylesheet s) =
 
 private set[Message] unallowedQuestionAttrErrors(Stylesheet s) {
   TypeMap typeMap = getTypeMap(getAccompanyingForm(s));
-  return 
-    {
+  return {
       typeWithInvalidAttr(sr.attr.name, \type.name, sr@location) | 
       qd <- getQuestionDefinitions(s), 
       qd.styleRules?,

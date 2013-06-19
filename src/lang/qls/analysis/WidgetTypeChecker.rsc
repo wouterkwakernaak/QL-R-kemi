@@ -20,16 +20,11 @@ import util::IDE;
 import util::Math;
 
 private map[Type, list[str]] allowedWidgets = (
-  booleanType("boolean"):
-    ["radio", "checkbox", "select"],
-  integerType("integer"):
-    ["text", "number", "slider"],
-  moneyType("money"):
-    ["text", "number", "slider"],
-  dateType("date"):
-    ["text", "datepicker"],
-  stringType("string"):
-    ["text"]
+  booleanType("boolean"): ["radio", "checkbox", "select"],
+  integerType("integer"): ["text", "number", "slider"],
+  moneyType("money"): ["text", "number", "slider"],
+  dateType("date"): ["text", "datepicker"],
+  stringType("string"): ["text"]
 );
 
 private bool isAllowedWidget(Type \type, str widget) =
@@ -41,8 +36,7 @@ public set[Message] unallowedWidgetErrors(Stylesheet s) =
   unallowedDefaultIntegerRangeErrors(s) +
   unallowedQuestionIntegerRangeErrors(s);
 
-private set[Message] unallowedDefaultWidgetErrors(Stylesheet s) = 
-  {
+private set[Message] unallowedDefaultWidgetErrors(Stylesheet s) = {
     typeWithInvalidWidget(widget.name, dd.\type.name, wsr@location) |
     dd <- getDefaultDefinitions(s),
     wsr:widgetStyleRule(_, widget) <- dd.styleRules,
@@ -51,8 +45,7 @@ private set[Message] unallowedDefaultWidgetErrors(Stylesheet s) =
 
 private set[Message] unallowedQuestionWidgetErrors(Stylesheet s) {
   TypeMap typeMap = getTypeMap(getAccompanyingForm(s));
-  return 
-    { 
+  return { 
       typeWithInvalidWidget(widget.name, \type.name, wsr@location) |
       qd <- getQuestionDefinitions(s),
       qd.styleRules?,
@@ -65,8 +58,7 @@ private set[Message] unallowedQuestionWidgetErrors(Stylesheet s) {
 
 private Type integer = integerType("integer");
 
-private bool isInteger(num number) =
-  round(number) == number;
+private bool isInteger(num number) = round(number) == number;
 
 private bool hasIntegerRange(WidgetStyleValue widget) =
   isInteger(widget.min) && isInteger(widget.max) && isInteger(widget.step)
@@ -75,8 +67,7 @@ private bool hasIntegerRange(WidgetStyleValue widget) =
 private default bool hasIntegerRange(WidgetStyleValue widget) =
   isInteger(widget.min) && isInteger(widget.max);
 
-private set[Message] unallowedDefaultIntegerRangeErrors(Stylesheet s) = 
-  {
+private set[Message] unallowedDefaultIntegerRangeErrors(Stylesheet s) = {
     invalidRangeType(dd.\type.name, wsr@location) |
     dd <- getDefaultDefinitions(s),
     dd.\type == integer,
@@ -87,8 +78,7 @@ private set[Message] unallowedDefaultIntegerRangeErrors(Stylesheet s) =
 
 private set[Message] unallowedQuestionIntegerRangeErrors(Stylesheet s) {
   TypeMap typeMap = getTypeMap(getAccompanyingForm(s));
-  return 
-    { 
+  return { 
       invalidRangeType(\type.name, wsr@location) |
       qd <- getQuestionDefinitions(s),
       qd.styleRules?,
