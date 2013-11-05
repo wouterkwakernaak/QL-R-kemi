@@ -32,6 +32,8 @@ private set[Message] buildAndReturnMessages(start[Stylesheet] sheet, loc target)
   buildAndReturnMessages(implode(sheet), target);
   
 private set[Message] buildAndReturnMessages(Stylesheet sheet, loc target) {
+  print("building ");
+  println(target);
   messages = semanticChecker(sheet);
   
   errors = {m | m <- messages, error(_, _) := m};

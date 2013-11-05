@@ -51,6 +51,8 @@ private void build(Form form, loc source) {
 }
   
 public set[Message] buildAndReturnMessages(Form form, loc target) {
+  print("building ");
+  println(target);
   messages = semanticChecker(form);
   
   errors = {m | m <- messages, error(_, _) := m};

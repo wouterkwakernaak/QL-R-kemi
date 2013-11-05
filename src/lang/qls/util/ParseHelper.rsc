@@ -21,12 +21,21 @@ import lang::qls::\syntax::Color;
 import lang::qls::\syntax::Keyword;
 import lang::qls::\syntax::QLS;
 import \ParseTree;
+import IO;
 
-start[Stylesheet] parse(str src, loc l) = parse(#start[Stylesheet], src, l);
+start[Stylesheet] parse(str src, loc l) { 
+	println("parsing QLS");
+	return parse(#start[Stylesheet], src, l);
+}
 
 Stylesheet implode(Tree t) = implode(#lang::qls::\ast::AST::Stylesheet, t);
 
-Stylesheet parseStylesheet(str src) = 
-  implode(parse(#start[Stylesheet], src, |file:///-|));
+Stylesheet parseStylesheet(str src) {
+	println("parsing QLS");
+  	return implode(parse(#start[Stylesheet], src, |file:///-|));
+}
 
-Stylesheet parseStylesheet(loc f) = implode(parse(#start[Stylesheet], f));
+Stylesheet parseStylesheet(loc f) {
+	println("parsing QLS");
+	return implode(parse(#start[Stylesheet], f));
+}

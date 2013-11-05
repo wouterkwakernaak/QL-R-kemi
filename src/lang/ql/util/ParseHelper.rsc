@@ -24,26 +24,40 @@ Expr implodeExpr(Tree t) = implode(#Expr, t);
 Question implodeQuestion(Tree t) = implode(#Question, t);
 
 
-start[Form] parse(str src, loc l) = parse(#start[Form], src, l);
+start[Form] parse(str src, loc l) {
+	println("parsing QL");
+	return parse(#start[Form], src, l);
+}
 
-Expr parseExpr(str src) = 
-  implode(#lang::ql::\ast::AST::Expr, parse(#lang::ql::\syntax::QL::Expr, src, 
+Expr parseExpr(str src) {
+	println("parsing QL expression");
+  	return implode(#lang::ql::\ast::AST::Expr, parse(#lang::ql::\syntax::QL::Expr, src, 
     |file:///-|));
+}
 
-Tree justParseExpr(str src) = 
-  parse(#lang::ql::\syntax::QL::Expr, src, |file:///-|);
+Tree justParseExpr(str src) { 
+	println("parsing QL expression");
+	return parse(#lang::ql::\syntax::QL::Expr, src, |file:///-|);
+}
 
-
-Question parseQuestion(str src) = 
-  implode(#lang::ql::\ast::AST::Question, parse(#lang::ql::\syntax::QL::Question, 
+Question parseQuestion(str src) {
+	println("parsing QL question");
+  	return implode(#lang::ql::\ast::AST::Question, parse(#lang::ql::\syntax::QL::Question, 
     src, |file:///-|));
+}
   
-Form parseForm(str src) = 
-  implode(#lang::ql::\ast::AST::Form, parse(#start[Form], src, |file:///-|));
+Form parseForm(str src) {
+	println("parsing QL");
+ 	return implode(#lang::ql::\ast::AST::Form, parse(#start[Form], src, |file:///-|));
+}
   
-Form parseForm(loc f) = 
-  implode(#lang::ql::\ast::AST::Form, parse(#start[Form], f));
-
+Form parseForm(loc f) {
+	println("parsing QL");
+	return implode(#lang::ql::\ast::AST::Form, parse(#start[Form], f));
+}
   
-start[Form] justParseForm(loc f) = parse(#start[Form], f);
+start[Form] justParseForm(loc f) {
+	println("parsing QL");
+	return parse(#start[Form], f);
+}
   
